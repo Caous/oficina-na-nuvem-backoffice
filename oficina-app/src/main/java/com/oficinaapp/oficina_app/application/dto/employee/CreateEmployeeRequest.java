@@ -15,7 +15,13 @@ public record CreateEmployeeRequest(
         @NotBlank @Email String email,
         @NotBlank String phone,
         @NotNull EmployeeJobTitle jobTitle,
-        @NotBlank @Size(min = 8, max = 72) String password,
+
+        /**
+         * Optional: when the owner does not choose one, the digits of the
+         * employee's document become the initial password.
+         */
+        @Size(min = 8, max = 72) String password,
+
         @Valid AddressPayload address
 
 ) {
