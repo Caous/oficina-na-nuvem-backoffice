@@ -34,6 +34,13 @@ public class SecurityConfig {
             "/api/auth/register/workshop"
     };
 
+    /** The API description is public; the endpoints it describes are not. */
+    private static final String[] DOCUMENTATION = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
+
     private static final String[] WORKSHOP_AREA = {
             "/api/employees/**",
             "/api/service-categories/**",
@@ -56,6 +63,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+
+                        .requestMatchers(DOCUMENTATION).permitAll()
 
                         // Without this, a failed request is forwarded to /error with no
                         // security context and answers 401, hiding the real status.

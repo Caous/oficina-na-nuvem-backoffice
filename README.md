@@ -27,6 +27,21 @@ cd oficina-app && ./mvnw spring-boot:run
 The API listens on `http://localhost:8080` and every path below is prefixed
 with `/api`.
 
+### Interactive documentation
+
+Swagger UI is served by the running API:
+
+- **UI** — <http://localhost:8080/swagger-ui.html>
+- **OpenAPI document** — <http://localhost:8080/v3/api-docs>
+
+Both are public; the endpoints they describe are not. Sign in through
+`POST /api/auth/login`, copy the `accessToken` and press **Authorize** — the
+bearer token then applies to every call you try from the page.
+
+The document is generated from the controllers and DTOs, so it cannot drift
+from the code the way the tables below can. Treat it as the contract and this
+README as the guided tour.
+
 ### Configuration
 
 Database credentials live only in the `.env` file; everything else has a
@@ -40,6 +55,7 @@ development default.
 | `JWT_SECRET` | development secret | HMAC key, **must** be replaced outside local runs |
 | `JWT_EXPIRATION_MINUTES` | `480` | Token lifetime |
 | `FIPE_BASE_URL` | `https://parallelum.com.br/fipe/api/v1` | Public FIPE table |
+| `SERVER_PORT` | `8080` | Port the API listens on |
 
 ## How the pieces relate
 
